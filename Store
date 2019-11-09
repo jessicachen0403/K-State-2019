@@ -1,0 +1,63 @@
+package test;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+public class Store {
+
+	private String name;
+	private double multiplier;
+
+	ArrayList<String> stores = readFile.textToList("Grocery Stores.txt");
+	List<Store> storeList = new LinkedList<Store>();
+
+	public Store(String aName, double aMultiplier)
+	{
+		name = aName;
+		multiplier = aMultiplier;
+	}
+
+	public String toString()
+	{
+		return (name + " " + multiplier);
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public double getMultiplier()
+	{
+		return multiplier;
+	}
+
+	public List<Store> createStoreList()
+	{
+		for(int i = 0; i < stores.size(); i++)
+		{
+			String word = "";
+			Double aMultiplier;
+			int counter =0;
+			String x = stores.get(i);
+			//System.out.println(x);
+			for(int j=0; j<x.length(); j++)
+			{
+
+				if(x.substring(j, j+1).equals(","))
+				{
+					word = x.substring(j-counter, j);
+					String theMultiplier = x.substring(j+2, x.length());
+					aMultiplier = Double.valueOf(theMultiplier);
+					storeList.add(new Store(word, aMultiplier));
+					counter = 0;
+				}
+				else
+				{
+					word += x.substring(j, j+1);
+					counter++;
+				}
+			}
+		}
+		return storeList;
+	}
+}
