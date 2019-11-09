@@ -9,7 +9,7 @@ public class Restaurant {
 	private String category;
 	private int price;
 
-	static ArrayList<String> restaurants = readFile.textToList("Restaurants.txt");
+	static ArrayList<String> restaurants = ReadFile.textToList("Restaurants.txt");
 	static List<Restaurant> restList = new LinkedList<Restaurant>();
 
 	public Restaurant(String aName, String theCategory, int thePrice)
