@@ -1,6 +1,6 @@
-package mealplan;
+package mealPlans;
 import java.util.Scanner;
-public class userinput 
+public class UserInput 
 {
 	public static void main (String[] args)
 	{
@@ -33,12 +33,11 @@ public class userinput
 			System.out.print("What type of diet? (Keto, vegetarian, etc)");
 			input.nextLine();
 			String dietAnswer = input.nextLine();
+			Profile person = new Profile(budget, zipcode, rest, days, dietAnswer);
 		}
-	
-		
-		
-		
+		else
+		{
+			Profile person = new Profile(budget, zipcode, rest, days);
+		}
 	}
-	
-	
 }
