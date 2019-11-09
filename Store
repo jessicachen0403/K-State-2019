@@ -7,8 +7,8 @@ public class Store {
 	private String name;
 	private double multiplier;
 
-	ArrayList<String> stores = readFile.textToList("Grocery Stores.txt");
-	List<Store> storeList = new LinkedList<Store>();
+	static ArrayList<String> stores = readFile.textToList("Grocery Stores.txt");
+	static List<Store> storeList = new LinkedList<Store>();
 
 	public Store(String aName, double aMultiplier)
 	{
@@ -31,7 +31,7 @@ public class Store {
 		return multiplier;
 	}
 
-	public List<Store> createStoreList()
+	public static List<Store> createStoreList()
 	{
 		for(int i = 0; i < stores.size(); i++)
 		{
@@ -53,7 +53,6 @@ public class Store {
 				}
 				else
 				{
-					word += x.substring(j, j+1);
 					counter++;
 				}
 			}
