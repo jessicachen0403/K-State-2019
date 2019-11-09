@@ -1,0 +1,65 @@
+package test;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Food 
+{
+	private String name;
+	private double cost;
+	
+	static ArrayList<String> food = readFile.textToList("Food Items.txt");
+	static List<Food> foodList = new LinkedList<Food>();
+	
+	public Food(String aFood, double aCost)
+	{
+		name = aFood;
+		cost = aCost;
+	}
+	
+	public String toString()
+	{
+		return (food + " " + cost);
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public double getPrice()
+	{
+		return cost;
+	}
+	
+	public static List<Food> createFoodList()
+	{
+		for(int i = 0; i < food.size(); i++)
+		{
+			String word = "";
+			Double cost;
+			int counter =0;
+			String x = food.get(i);
+			//System.out.println(x);
+			for(int j=0; j<x.length(); j++)
+			{
+
+				if(x.substring(j, j+1).equals(","))
+				{
+					word = x.substring(j-counter, j);
+					String theCost = x.substring(j+2, x.length());
+					cost = Double.valueOf(theCost);
+					foodList.add(new Food(word,cost));
+					counter = 0;
+				}
+				else
+				{
+					word += x.substring(j, j+1);
+					counter++;
+				}
+			}
+		}
+		return foodList;
+	}
+}
