@@ -1,0 +1,51 @@
+public class Profile {
+
+	private int budget;
+	private int zip;
+	private String likes;
+	private int daysOut;
+	private String diet;
+
+	public Profile(int theBudget, int zipCode, String theLikes, int numDaysOut, String dietaryRestrictions)
+	{
+		budget = theBudget;
+		zip = zipCode;
+		likes = theLikes;
+		daysOut = numDaysOut;
+		diet = dietaryRestrictions;
+	}
+
+	public Profile(int theBudget, int zipCode, String theLikes, int numDaysOut)
+	{
+		budget = theBudget;
+		zip = zipCode;
+		likes = theLikes;
+		daysOut = numDaysOut;
+	}
+
+	public int getBudget()
+	{
+		return budget;
+	}
+	
+	public int getZip()
+	{
+		return zip;
+	}
+	
+	public String getLikes()
+	{
+		return likes;
+	}
+	
+	public int getDaysOut()
+	{
+		return daysOut;
+	}
+	
+	public String getDietaryRestrictions()
+	{
+		return diet;
+	}
+
+}
