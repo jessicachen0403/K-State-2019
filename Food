@@ -9,8 +9,8 @@ public class Food
 	private String name;
 	private double cost;
 	
-	ArrayList<String> food = readFile.textToList("Food Items.txt");
-	List<Food> foodList = new LinkedList<Food>();
+	static ArrayList<String> food = readFile.textToList("Food Items.txt");
+	static List<Food> foodList = new LinkedList<Food>();
 	
 	public Food(String aFood, double aCost)
 	{
@@ -33,7 +33,7 @@ public class Food
 		return cost;
 	}
 	
-	public List<Food> createFoodList()
+	public static List<Food> createFoodList()
 	{
 		for(int i = 0; i < food.size(); i++)
 		{
@@ -55,7 +55,6 @@ public class Food
 				}
 				else
 				{
-					word += x.substring(j, j+1);
 					counter++;
 				}
 			}
