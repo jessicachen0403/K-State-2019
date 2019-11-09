@@ -7,7 +7,7 @@ public class Store {
 	private String name;
 	private double multiplier;
 
-	static ArrayList<String> stores = readFile.textToList("Grocery Stores.txt");
+	static ArrayList<String> stores = ReadFile.textToList("Grocery Stores.txt");
 	static List<Store> storeList = new LinkedList<Store>();
 
 	public Store(String aName, double aMultiplier)
