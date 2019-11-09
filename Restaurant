@@ -1,0 +1,91 @@
+package test;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Restaurant {
+	private String name;
+	private String category;
+	private int price;
+
+	static ArrayList<String> restaurants = readFile.textToList("Restaurants.txt");
+	static List<Restaurant> restList = new LinkedList<Restaurant>();
+
+	public Restaurant(String aName, String theCategory, int thePrice)
+	{
+		name = aName;
+		category = theCategory;
+		price = thePrice;
+	}
+
+	public String toString()
+	{
+		return (name + " " + category + " " + price);
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public String getCategory()
+	{
+		return category;
+	}
+	
+	public int getPrice()
+	{
+		return price;
+	}
+
+	public static List<Restaurant> createRestaurantList()
+	{
+		for(int i = 0; i < restaurants.size(); i++)
+		{
+			String word = "";
+			String temp = "";
+			String theCategory = "";
+			Integer thePrice;
+			int counter =0;
+			int count = 0;
+			String x = restaurants.get(i);
+			//System.out.println(x);
+			for(int j=0; j<x.length(); j++)
+			{
+
+				if(x.substring(j, j+1).equals(","))
+				{
+					word = x.substring(j-counter, j);
+					temp = x.substring(j+2, x.length());
+
+					for (int k = 0; k < temp.length(); k++)
+					{
+						
+						if (temp.substring(k, k+1).equals(",")) 
+						{
+							theCategory = temp.substring(k-count, k);
+							thePrice = Integer.valueOf(temp.substring(k + 2, temp.length()));
+							System.out.println(theCategory);
+							System.out.println(thePrice);
+							restList.add(new Restaurant(word, theCategory, thePrice));
+							count = 0;
+						}
+						else
+						{
+							count++;
+						}
+					}
+	
+					counter = 0;
+				}
+				else
+				{
+					word += x.substring(j, j+1);
+					counter++;
+				}
+			}
+		}
+		return restList;
+	}
+}
