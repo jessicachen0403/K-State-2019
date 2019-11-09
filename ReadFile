@@ -1,0 +1,41 @@
+package mealPlans;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
+public class ReadFile {
+
+	private static ArrayList<String> groceryFoods = new ArrayList<String>();{
+
+		try {
+			Scanner input = new Scanner(new File("groceryfoods.txt"));
+			while(input.hasNextLine()){
+				String temp = input.nextLine().trim();
+				System.out.println(temp);
+				groceryFoods.add(temp);
+			}
+			input.close();
+		}
+		catch(Exception e){
+			System.out.println("Error reading or parsing groceryfoods.txt\n" + e);
+		}   
+	}
+	public static String textToString(String fileName)
+	{  
+		String temp = "";
+		try {
+
+			Scanner input = new Scanner(new File("./Data/" + fileName));
+
+			while(input.hasNext()){
+				temp = temp + input.next() + " ";
+			}
+			input.close();
+
+		}
+		catch(Exception e){
+			System.out.println("Unable to locate " + fileName);
+		}
+		return temp.trim();
+	}
+
+}
