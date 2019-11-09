@@ -1,0 +1,6 @@
+	public static void main(String[] args) 
+	{
+		List<Food> foodList = Food.createFoodList();
+		List<Store> storeList = Store.createStoreList();
+		List<Restaurant> restList = Restaurant.createRestaurantList();	
+	}
