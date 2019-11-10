@@ -90,6 +90,7 @@ public class Restaurant {
 	
 	public static String surpriseMe()
 	{
+		createRestaurantList();
 		int random = (int) (Math.random() * 16);
 		String randRest = restList.get(random).getName() + ", $" + restList.get(random).getPrice();
 		return randRest;
