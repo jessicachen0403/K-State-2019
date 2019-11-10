@@ -6,19 +6,21 @@ public class Store {
 
 	private String name;
 	private double multiplier;
+	private double miles;
 
-	static ArrayList<String> stores = ReadFile.textToList("Grocery Stores.txt");
+	static ArrayList<String> stores = readFile.textToList("Grocery Stores.txt");
 	static List<Store> storeList = new LinkedList<Store>();
 
-	public Store(String aName, double aMultiplier)
+	public Store(String aName, double aMultiplier, double aMiles)
 	{
 		name = aName;
 		multiplier = aMultiplier;
+		miles = aMiles;
 	}
 
 	public String toString()
 	{
-		return (name + " " + multiplier);
+		return (name + " " + multiplier + " " + miles);
 	}
 
 	public String getName()
@@ -30,6 +32,11 @@ public class Store {
 	{
 		return multiplier;
 	}
+	
+	public double getMiles()
+	{
+		return miles;
+	}
 
 	public static List<Store> createStoreList()
 	{
@@ -37,7 +44,9 @@ public class Store {
 		{
 			String word = "";
 			Double aMultiplier;
+			Double miles; 
 			int counter =0;
+			int count =0;
 			String x = stores.get(i);
 			//System.out.println(x);
 			for(int j=0; j<x.length(); j++)
@@ -46,9 +55,24 @@ public class Store {
 				if(x.substring(j, j+1).equals(","))
 				{
 					word = x.substring(j-counter, j);
-					String theMultiplier = x.substring(j+2, x.length());
-					aMultiplier = Double.valueOf(theMultiplier);
-					storeList.add(new Store(word, aMultiplier));
+					//System.out.println(word);
+					String temp = x.substring(j+2, x.length());
+					
+					for (int k = 0; k < temp.length(); k++)
+					{
+
+						if (temp.substring(k, k+1).equals(",")) 
+						{
+							aMultiplier = Double.valueOf(temp.substring(k-count, k));
+							miles = Double.valueOf(temp.substring(k + 2, temp.length()));
+							storeList.add(new Store(word, aMultiplier, miles));
+							count = 0;
+						}
+						else
+						{
+							count++;
+						}
+					}
 					counter = 0;
 				}
 				else
