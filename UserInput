@@ -1,5 +1,7 @@
-package mealPlans;
+package mealplan;
 import java.util.Scanner;
+
+
 public class UserInput 
 {
 	public static void main (String[] args)
@@ -9,35 +11,23 @@ public class UserInput
 		System.out.print("Enter your name: ");
 		String name = input.nextLine();
 		System.out.println("Welcome, " + name + "!");
-		
+
 		//questions
 		System.out.print("What's your meal budget for this week?");
 		int budget = input.nextInt();
 		input.nextLine();
-		
+
 		System.out.print("What's your zipcode?");
 		int zipcode = input.nextInt();
-		
+
 		System.out.print("Favorite type of restaurants? (American, Chinese, etc)");
 		String rest = input.nextLine();
 		input.nextLine();
-		
+
 		System.out.print("How many days do you plan to eat out?");
 		int days = input.nextInt();
-		
-		System.out.print("Are you on any type of diet? (True/False)");
-		Boolean diet = input.nextBoolean();
-		if(diet)
-		{
-			//if they type true, then this will print
-			System.out.print("What type of diet? (Keto, vegetarian, etc)");
-			input.nextLine();
-			String dietAnswer = input.nextLine();
-			Profile person = new Profile(budget, zipcode, rest, days, dietAnswer);
-		}
-		else
-		{
-			Profile person = new Profile(budget, zipcode, rest, days);
-		}
+
+		Profile person = new Profile(budget, zipcode, rest, days);
+		person.printWeeklyMealPlan();
 	}
 }
