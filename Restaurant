@@ -1,4 +1,4 @@
-package test;
+package mealPlans;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -66,8 +66,6 @@ public class Restaurant {
 						{
 							theCategory = temp.substring(k-count, k);
 							thePrice = Integer.valueOf(temp.substring(k + 2, temp.length()));
-							System.out.println(theCategory);
-							System.out.println(thePrice);
 							restList.add(new Restaurant(word, theCategory, thePrice));
 							count = 0;
 						}
@@ -87,5 +85,12 @@ public class Restaurant {
 			}
 		}
 		return restList;
+	}
+	
+	public static String surpriseMe()
+	{
+		int random = (int) (Math.random() * 16);
+		String randRest = restList.get(random).getName();
+		return randRest;
 	}
 }
