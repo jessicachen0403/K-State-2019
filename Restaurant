@@ -1,4 +1,4 @@
-package mealPlans;
+package mealplan;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -7,12 +7,12 @@ import java.util.List;
 public class Restaurant {
 	private String name;
 	private String category;
-	private int price;
+	private double price;
 
 	static ArrayList<String> restaurants = ReadFile.textToList("Restaurants.txt");
 	static List<Restaurant> restList = new LinkedList<Restaurant>();
 
-	public Restaurant(String aName, String theCategory, int thePrice)
+	public Restaurant(String aName, String theCategory, double thePrice)
 	{
 		name = aName;
 		category = theCategory;
@@ -34,7 +34,7 @@ public class Restaurant {
 		return category;
 	}
 	
-	public int getPrice()
+	public double getPrice()
 	{
 		return price;
 	}
@@ -46,7 +46,7 @@ public class Restaurant {
 			String word = "";
 			String temp = "";
 			String theCategory = "";
-			Integer thePrice;
+			Double thePrice;
 			int counter =0;
 			int count = 0;
 			String x = restaurants.get(i);
@@ -65,7 +65,8 @@ public class Restaurant {
 						if (temp.substring(k, k+1).equals(",")) 
 						{
 							theCategory = temp.substring(k-count, k);
-							thePrice = Integer.valueOf(temp.substring(k + 2, temp.length()));
+							thePrice = Double.valueOf(temp.substring(k + 2, temp.length()));
+							thePrice = Math.round(thePrice * 100.00) / 100.000;
 							restList.add(new Restaurant(word, theCategory, thePrice));
 							count = 0;
 						}
@@ -90,7 +91,7 @@ public class Restaurant {
 	public static String surpriseMe()
 	{
 		int random = (int) (Math.random() * 16);
-		String randRest = restList.get(random).getName();
+		String randRest = restList.get(random).getName() + ", $" + restList.get(random).getPrice();
 		return randRest;
 	}
 }
