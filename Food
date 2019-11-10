@@ -1,4 +1,4 @@
-package test;
+package mealplan;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -9,7 +9,7 @@ public class Food
 	private String name;
 	private double cost;
 	
-	static ArrayList<String> food = readFile.textToList("Food Items.txt");
+	static ArrayList<String> food = ReadFile.textToList("Food Items.txt");
 	static List<Food> foodList = new LinkedList<Food>();
 	
 	public Food(String aFood, double aCost)
@@ -41,7 +41,6 @@ public class Food
 			Double cost;
 			int counter =0;
 			String x = food.get(i);
-			//System.out.println(x);
 			for(int j=0; j<x.length(); j++)
 			{
 
