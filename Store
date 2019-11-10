@@ -1,26 +1,25 @@
-package test;
+package mealplan;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-public class Store {
+public class Store 
+{
 
 	private String name;
 	private double multiplier;
-	private double miles;
 
-	static ArrayList<String> stores = readFile.textToList("Grocery Stores.txt");
+	static ArrayList<String> stores = ReadFile.textToList("Grocery Stores.txt");
 	static List<Store> storeList = new LinkedList<Store>();
 
-	public Store(String aName, double aMultiplier, double aMiles)
+	public Store(String aName, double aMultiplier)
 	{
 		name = aName;
 		multiplier = aMultiplier;
-		miles = aMiles;
 	}
 
 	public String toString()
 	{
-		return (name + " " + multiplier + " " + miles);
+		return (name + " " + multiplier);
 	}
 
 	public String getName()
@@ -32,11 +31,6 @@ public class Store {
 	{
 		return multiplier;
 	}
-	
-	public double getMiles()
-	{
-		return miles;
-	}
 
 	public static List<Store> createStoreList()
 	{
@@ -44,35 +38,17 @@ public class Store {
 		{
 			String word = "";
 			Double aMultiplier;
-			Double miles; 
-			int counter =0;
-			int count =0;
+			int counter = 0;
 			String x = stores.get(i);
-			//System.out.println(x);
 			for(int j=0; j<x.length(); j++)
 			{
 
 				if(x.substring(j, j+1).equals(","))
 				{
 					word = x.substring(j-counter, j);
-					//System.out.println(word);
-					String temp = x.substring(j+2, x.length());
-					
-					for (int k = 0; k < temp.length(); k++)
-					{
-
-						if (temp.substring(k, k+1).equals(",")) 
-						{
-							aMultiplier = Double.valueOf(temp.substring(k-count, k));
-							miles = Double.valueOf(temp.substring(k + 2, temp.length()));
-							storeList.add(new Store(word, aMultiplier, miles));
-							count = 0;
-						}
-						else
-						{
-							count++;
-						}
-					}
+					String theMultiplier = x.substring(j+2, x.length());
+					aMultiplier = Double.valueOf(theMultiplier);
+					storeList.add(new Store(word, aMultiplier));
 					counter = 0;
 				}
 				else
