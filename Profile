@@ -1,3 +1,8 @@
+package mealPlans;
+
+import java.util.List;
+import java.time.DayOfWeek;
+
 public class Profile {
 
 	private int budget;
@@ -5,7 +10,10 @@ public class Profile {
 	private String likes;
 	private int daysOut;
 	private String diet;
-
+	public double total;
+	private List<Food> foodList = Food.createFoodList();
+	private List<Restaurant> restList = Restaurant.createRestaurantList();
+	
 	public Profile(int theBudget, int zipCode, String theLikes, int numDaysOut, String dietaryRestrictions)
 	{
 		budget = theBudget;
@@ -27,25 +35,57 @@ public class Profile {
 	{
 		return budget;
 	}
-	
+
 	public int getZip()
 	{
 		return zip;
 	}
-	
+
 	public String getLikes()
 	{
 		return likes;
 	}
-	
+
 	public int getDaysOut()
 	{
 		return daysOut;
 	}
-	
+
 	public String getDietaryRestrictions()
 	{
 		return diet;
 	}
+
+	public Food returnDailyMealPlan()
+	{
+		String ingredients = "";
+		double total = 0;
+			for (int j = (int) Math.random() * 2; j < 5; j++)
+			{
+				int random = (int) Math.random() * 19;
+				ingredients += (foodList.get(random)) + ", ";
+				total += foodList.get(random).getPrice();
+			}
+			Food dailyTotal = new Food(ingredients, total);
+			System.out.println(dailyTotal.getName());
+			System.out.println(dailyTotal.getPrice());
+			return dailyTotal;
+		}
+	
+	public String returnWeeklyMealPlan()
+	{
+		int count = 0;
+		for (int i = 1; i < 8; i++)
+		{
+			DayOfWeek day = DayOfWeek.of(i);
+			if (count < daysOut)
+			{
+				
+			}
+		}
+	}
+	//meal plan of foods, 7 days
+	//budget -cost = x
+	// x / days out 
 
 }
