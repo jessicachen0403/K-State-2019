@@ -1,7 +1,5 @@
 package mealplan;
 import java.util.Scanner;
-
-
 public class UserInput 
 {
 	public static void main (String[] args)
@@ -13,18 +11,18 @@ public class UserInput
 		System.out.println("Welcome, " + name + "!");
 
 		//questions
-		System.out.print("What's your meal budget for this week?");
+		System.out.print("What's your meal budget for this week in dollars? ");
 		int budget = input.nextInt();
 		input.nextLine();
 
-		System.out.print("What's your zipcode?");
+		System.out.print("What's your zipcode? ");
 		int zipcode = input.nextInt();
 
-		System.out.print("Favorite type of restaurants? (American, Chinese, etc)");
+		System.out.print("Favorite type of restaurants? (American, Chinese, etc) ");
 		String rest = input.nextLine();
 		input.nextLine();
 
-		System.out.print("How many days do you plan to eat out?");
+		System.out.print("How many days do you plan to eat out? ");
 		int days = input.nextInt();
 
 		Profile person = new Profile(budget, zipcode, rest, days);
