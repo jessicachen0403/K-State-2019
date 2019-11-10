@@ -1,4 +1,4 @@
-package mealPlans;
+package mealplan;
 
 import java.util.List;
 import java.time.DayOfWeek;
@@ -12,7 +12,6 @@ public class Profile {
 	private String diet;
 	public double total;
 	private List<Food> foodList = Food.createFoodList();
-	private List<Restaurant> restList = Restaurant.createRestaurantList();
 	
 	public Profile(int theBudget, int zipCode, String theLikes, int numDaysOut, String dietaryRestrictions)
 	{
@@ -60,15 +59,18 @@ public class Profile {
 	{
 		String ingredients = "";
 		double total = 0;
-			for (int j = (int) Math.random() * 2; j < 5; j++)
+			for (int j = (int) (Math.random() * 2); j < 4; j++)
 			{
-				int random = (int) Math.random() * 19;
-				ingredients += (foodList.get(random)) + ", ";
+				int random = (int) (Math.random() * 20);
+				while (ingredients.indexOf(foodList.get(random).getName()) >= 0)
+				{
+					random = (int)(Math.random() * 20);
+				}
+				ingredients += (foodList.get(random).getName()) + ", ";
 				total += foodList.get(random).getPrice();
 			}
+			total = Math.round(total * 100.0) / 100.00;
 			Food dailyTotal = new Food(ingredients, total);
-			System.out.println(dailyTotal.getName());
-			System.out.println(dailyTotal.getPrice());
 			return dailyTotal;
 		}
 	
@@ -92,12 +94,14 @@ public class Profile {
 				}
 				else
 				{
-					System.out.println(day + ": " + returnDailyMealPlan());
+					Food temp = returnDailyMealPlan();
+					System.out.println(day + ": " + temp.getName() + " $" + temp.getPrice());
 				}
 			}
 			else
 			{
-				System.out.println(day + ": " + returnDailyMealPlan());
+				Food temp = returnDailyMealPlan();
+				System.out.println(day + ": " + temp.getName() + " $" + temp.getPrice());
 			}
 		}
 	}
