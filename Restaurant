@@ -50,7 +50,6 @@ public class Restaurant {
 			int counter =0;
 			int count = 0;
 			String x = restaurants.get(i);
-			//System.out.println(x);
 			for(int j=0; j<x.length(); j++)
 			{
 
@@ -66,7 +65,7 @@ public class Restaurant {
 						{
 							theCategory = temp.substring(k-count, k);
 							thePrice = Double.valueOf(temp.substring(k + 2, temp.length()));
-							thePrice = Math.round(thePrice * 100.00) / 100.000;
+							thePrice = Math.round(thePrice * 100.0) / 100.0;
 							restList.add(new Restaurant(word, theCategory, thePrice));
 							count = 0;
 						}
