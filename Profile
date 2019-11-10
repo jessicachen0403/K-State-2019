@@ -72,7 +72,7 @@ public class Profile {
 			return dailyTotal;
 		}
 	
-	public String returnWeeklyMealPlan()
+	public void printWeeklyMealPlan()
 	{
 		int count = 0;
 		for (int i = 1; i < 8; i++)
@@ -80,12 +80,25 @@ public class Profile {
 			DayOfWeek day = DayOfWeek.of(i);
 			if (count < daysOut)
 			{
-				
+				if (i + daysOut > 7) 
+				{
+					System.out.println(day + ": " + Restaurant.surpriseMe());
+					count++;
+				}
+				else if (Math.random() > 0.5)
+				{
+					System.out.println(day + ": " + Restaurant.surpriseMe());
+					count++;
+				}
+				else
+				{
+					System.out.println(day + ": " + returnDailyMealPlan());
+				}
+			}
+			else
+			{
+				System.out.println(day + ": " + returnDailyMealPlan());
 			}
 		}
 	}
-	//meal plan of foods, 7 days
-	//budget -cost = x
-	// x / days out 
-
 }
