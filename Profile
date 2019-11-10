@@ -1,0 +1,109 @@
+package mealplan;
+
+import java.util.List;
+import java.time.DayOfWeek;
+
+public class Profile {
+
+	private int budget;
+	private int zip;
+	private String likes;
+	private int daysOut;
+	private String diet;
+	public double total;
+	private List<Food> foodList = Food.createFoodList();
+	private List<Restaurant> restList = Restaurant.createRestaurantList();
+	
+	public Profile(int theBudget, int zipCode, String theLikes, int numDaysOut, String dietaryRestrictions)
+	{
+		budget = theBudget;
+		zip = zipCode;
+		likes = theLikes;
+		daysOut = numDaysOut;
+		diet = dietaryRestrictions;
+	}
+
+	public Profile(int theBudget, int zipCode, String theLikes, int numDaysOut)
+	{
+		budget = theBudget;
+		zip = zipCode;
+		likes = theLikes;
+		daysOut = numDaysOut;
+	}
+
+	public int getBudget()
+	{
+		return budget;
+	}
+
+	public int getZip()
+	{
+		return zip;
+	}
+
+	public String getLikes()
+	{
+		return likes;
+	}
+
+	public int getDaysOut()
+	{
+		return daysOut;
+	}
+
+	public String getDietaryRestrictions()
+	{
+		return diet;
+	}
+
+	public Food returnDailyMealPlan()
+	{
+		String ingredients = "";
+		double total = 0;
+			for (int j = (int) (Math.random() * 2); j < 4; j++)
+			{
+				int random = (int) (Math.random() * 20);
+				while (ingredients.indexOf(foodList.get(random).getName()) >= 0)
+				{
+					random = (int)(Math.random() * 20);
+				}
+				ingredients += (foodList.get(random).getName()) + ", ";
+				total += foodList.get(random).getPrice();
+			}
+			total = Math.round(total * 100.0) / 100.00;
+			Food dailyTotal = new Food(ingredients, total);
+			return dailyTotal;
+		}
+	
+	public void printWeeklyMealPlan()
+	{
+		int count = 0;
+		for (int i = 1; i < 8; i++)
+		{
+			DayOfWeek day = DayOfWeek.of(i);
+			if (count < daysOut)
+			{
+				if (i + daysOut > 7) 
+				{
+					System.out.println(day + ": " + Restaurant.surpriseMe());
+					count++;
+				}
+				else if (Math.random() > 0.5)
+				{
+					System.out.println(day + ": " + Restaurant.surpriseMe());
+					count++;
+				}
+				else
+				{
+					Food temp = returnDailyMealPlan();
+					System.out.println(day + ": " + temp.getName() + " $" + temp.getPrice());
+				}
+			}
+			else
+			{
+				Food temp = returnDailyMealPlan();
+				System.out.println(day + ": " + temp.getName() + " $" + temp.getPrice());
+			}
+		}
+	}
+}
