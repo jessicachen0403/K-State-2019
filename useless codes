@@ -1,0 +1,235 @@
+package test;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.time.DayOfWeek;
+
+public class Profile {
+
+	private int budget;
+	private int zip;
+	private String likes;
+	private int daysOut;
+	private String diet;
+	public double total;
+	private List<Food> foodList = Food.createFoodList();
+	//static List<Food> foodList1 = new LinkedList<Food>();
+	//private List<Restaurant> restList = Restaurant.createRestaurantList();
+	static List<Store> storeListTotal = new LinkedList<Store>();
+	//private List<Store> storeList1 = Store.createStoreList();
+	private List<Store> storeList = Store.createStoreList();
+
+	public Profile(int theBudget, int zipCode, String theLikes, int numDaysOut, String dietaryRestrictions)
+	{
+		budget = theBudget;
+		zip = zipCode;
+		likes = theLikes;
+		daysOut = numDaysOut;
+		diet = dietaryRestrictions;
+	}
+
+	public Profile(int theBudget, int zipCode, String theLikes, int numDaysOut)
+	{
+		budget = theBudget;
+		zip = zipCode;
+		likes = theLikes;
+		daysOut = numDaysOut;
+	}
+
+	public int getBudget()
+	{
+		return budget;
+	}
+
+	public int getZip()
+	{
+		return zip;
+	}
+
+	public String getLikes()
+	{
+		return likes;
+	}
+
+	public int getDaysOut()
+	{
+		return daysOut;
+	}
+
+	public String getDietaryRestrictions()
+	{
+		return diet;
+	}
+
+	public Food returnDailyMealPlan()
+	{
+		String ingredients = "";
+		double total = 0;
+		for (int j = (int) (Math.random() * 2); j < 4; j++)
+		{
+			int random = (int) (Math.random() * 20);
+			while (ingredients.indexOf(foodList.get(random).getName()) >= 0)
+			{
+				random = (int)(Math.random() * 20);
+			}
+			ingredients += (foodList.get(random).getName()) + ", ";
+			total += foodList.get(random).getPrice();
+		}
+		total = Math.round(total * 100.0) / 100.00;
+		Food dailyTotal = new Food(ingredients, total);
+		return dailyTotal;
+	}
+
+	public void printWeeklyMealPlan()
+	{
+		int count = 0;
+		for (int i = 1; i < 8; i++)
+		{
+			DayOfWeek day = DayOfWeek.of(i);
+			if (count < daysOut)
+			{
+				if (i + daysOut > 7) 
+				{
+					System.out.println(day + ": " + Restaurant.surpriseMe());
+					count++;
+				}
+				else if (Math.random() > 0.5)
+				{
+					System.out.println(day + ": " + Restaurant.surpriseMe());
+					count++;
+				}
+				else
+				{
+					Food temp = returnDailyMealPlan();
+					System.out.println(day + ": " + temp.getName() + " $" + temp.getPrice());
+				}
+			}
+			else
+			{
+				Food temp = returnDailyMealPlan();
+				System.out.println(day + ": " + temp.getName() + " $" + temp.getPrice());
+			}
+		}
+	}
+
+
+	public Store lowestPrice()
+	{
+		String foodName = (returnDailyMealPlan()).getName();
+		ArrayList<String> foodList1 = new ArrayList<String>();
+		ArrayList<Double> storeListTotal1 = new ArrayList<Double>();
+		double price;
+		Double prices;
+		int counter = 0;
+		String aFood = "";
+		Food theFood = null;
+		double one =0;
+		double two =0;
+		double three =0;
+		double four =0;
+		double five =0;
+		double six =0;
+		double seven =0;
+		for(int k=0; k< foodName.length(); k++)
+		{
+			//creates a list of foods in the DailyMealPlan
+			if(foodName.substring(k, k+1).equals(","))
+			{
+				String food = foodName.substring(k-counter, k);
+				foodList1.add(food);
+				System.out.println(foodList1);
+				counter = 0;
+			}
+			else
+			{
+				counter++;				
+			}
+
+		}	
+		//for all the foods in the list we created above
+		for(int z = 0; z<foodList1.size(); z++)
+		{
+			//gets the name of food and assigns it to the object theFood
+			aFood = (foodList1.get(z));
+			System.out.println(aFood);
+			System.out.println(z);
+			
+			for(int n = 0; n < foodList1.size(); n++)
+			{
+			int l =0;
+			while(aFood.equals((foodList.get(n)).getName()))
+				/*if(aFood.equals((foodList.get(n)).getName()))*/
+				{
+					l++;
+				}
+					theFood = foodList.get(n);
+					System.out.println(theFood);
+					System.out.println(l);
+					//n++;
+					for(int i =0; i < storeList.size(); i++)
+					{
+						price = (storeList.get(i).getMultiplier())*Math.random();
+						System.out.println(price);
+						price *= theFood.getPrice();
+						prices = Double.valueOf(price);
+						//for one food, it will create a arrayList 
+						storeListTotal1.add(prices);
+						//System.out.println(storeListTotal);
+					}
+					one += (storeListTotal1.get(0));
+					two += (storeListTotal1.get(1));
+					three += (storeListTotal1.get(2));
+					four += (storeListTotal1.get(3));
+					five += (storeListTotal1.get(4));
+					six += (storeListTotal1.get(5));
+					seven += (storeListTotal1.get(6));
+					System.out.println(one);
+					System.out.println(two);
+					System.out.println(three);
+					System.out.println(one);
+				}
+				
+			storeListTotal.add(new Store(one));
+			storeListTotal.add(new Store(two));
+			storeListTotal.add(new Store(three));
+			storeListTotal.add(new Store(four));
+			storeListTotal.add(new Store(five));
+			storeListTotal.add(new Store(six));
+			storeListTotal.add(new Store(seven));
+			System.out.println(storeListTotal);
+
+			//finding the minimum of the final list
+			double min = 100;
+			Store a = null;
+			for(int h = 0; h < storeListTotal.size(); h++)
+			{
+				double b = (storeListTotal.get(h)).getPrices();
+				if(b < min)
+				{
+					min = b;
+					a = storeListTotal.get(h);
+				}
+			}
+			double finalPrice = (storeListTotal.get(storeListTotal.indexOf(a))).getPrices();
+			String finalName = (storeListTotal.get(storeListTotal.indexOf(a))).getName();
+			Store lowestPriceStore = new Store(finalName, finalPrice);
+			return lowestPriceStore;
+			}
+			//from all the stores, we find the prices of each item,
+			//although not saving the store name, the position in 
+			//the arrayList should remain same for later use
+			
+			//saving the prices of each food
+
+			//resetting storeListTotal back, so it can be repeated
+			for(int p = 0; p< storeListTotal.size(); p++)
+			{
+				storeListTotal.remove(p);
+			}
+			return null;
+		}
+		//having been calculating the total cost of each store using one, two...
+		//we now will create the final list with all the totals
+
+	}
